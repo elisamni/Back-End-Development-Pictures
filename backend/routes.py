@@ -11,7 +11,6 @@ data: list = json.load(open(json_url))
 # RETURN HEALTH OF THE APP
 ######################################################################
 
-
 @app.route("/health")
 def health():
     return jsonify(dict(status="OK")), 200
@@ -19,7 +18,6 @@ def health():
 ######################################################################
 # COUNT THE NUMBER OF PICTURES
 ######################################################################
-
 
 @app.route("/count")
 def count():
@@ -29,10 +27,10 @@ def count():
 
     return {"message": "Internal server error"}, 500
 
-
 ######################################################################
 # GET ALL PICTURES
 ######################################################################
+
 @app.route("/picture", methods=["GET"])
 def get_pictures():
     return jsonify(data), 200
@@ -41,7 +39,6 @@ def get_pictures():
 # GET A PICTURE
 ######################################################################
 
-
 @app.route("/picture/<int:id>", methods=["GET"])
 def get_picture_by_id(id):
     for picture in data:
@@ -49,10 +46,10 @@ def get_picture_by_id(id):
             return picture
     return {"message": "picture not found"}, 404
 
-
 ######################################################################
 # CREATE A PICTURE
 ######################################################################
+
 @app.route("/picture", methods=["POST"])
 def create_picture():
     # get data from the json body
@@ -67,11 +64,9 @@ def create_picture():
     data.append(picture_in)
     return picture_in, 201
 
-
 ######################################################################
 # UPDATE A PICTURE
 ######################################################################
-
 
 @app.route("/picture/<int:id>", methods=["PUT"])
 def update_picture(id):
@@ -88,6 +83,7 @@ def update_picture(id):
 ######################################################################
 # DELETE A PICTURE
 ######################################################################
+
 @app.route("/picture/<int:id>", methods=["DELETE"])
 def delete_picture(id):
     for picture in data:
@@ -96,3 +92,4 @@ def delete_picture(id):
             return "", 204
 
     return {"message": "picture not found"}, 404
+    
